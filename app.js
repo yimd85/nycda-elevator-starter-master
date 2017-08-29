@@ -36,10 +36,10 @@ lift.on('up', (passenger)=>{
       for (i=1;i<=passenger.destination;i++){
       console.log("Lift at floor:"+i);
       }
-
-      // you probably shouldn't keep the following in your version.
-      // just here for demonstration purposes.
-      console.log("Start descending # floors: "+ (i-1));
+      console.log("Lift drops off "+passenger.name);
+      for (x=passenger.destination;x>=0;x--){
+      console.log("Lift at floor:"+x);
+      }
       lift.emit('down');
   }, 1000)
 });
@@ -48,7 +48,7 @@ lift.on('up', (passenger)=>{
 lift.on('down', ()=>{
   setTimeout(()=>{
     // Add your own code after here.
-    console.log("Bullocks, I'm going down...");
+
     if(tenants.length!==0){
       lift.emit('up', tenants.pop() )
     } else{
@@ -60,3 +60,4 @@ lift.on('down', ()=>{
 // run node app.js and take note of what happens.
 // what happens if you change it to 'down'?
 lift.emit('up', tenants.pop());
+
